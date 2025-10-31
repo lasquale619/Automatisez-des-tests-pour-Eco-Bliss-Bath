@@ -1,3 +1,4 @@
+
 describe('smoke test', () => {
   beforeEach(()=> {
     cy.visit('/');
@@ -90,5 +91,26 @@ describe('smoke test', () => {
 
   it('verfier que Le lien du logo redirige vers la page accueil',()=>{
     cy.get('#footer-logo a').should('have.attr', 'href').and('include', '/');
+  });
+});
+
+describe('smoke test quand on est connecté',()=>{
+  beforeEach(()=>{
+    cy.request('POST', `${Cypress.env('apiUrl')}login`,{
+      username: Cypress.env('testEmail'),
+      password: Cypress.env('testMDP'),
+    }).then((response) => {
+      const token = response.body.token;      
+      cy.visit('/', {
+        onBeforeLoad(win) {
+          win.localStorage.setItem('user', token);
+        },
+      });
+    });
+  });
+
+  it('affiche Mon panier et Deconnexion quand on est connecté',()=>{
+    cy.get('[data-cy="nav-link-cart"]').should('be.visible');
+    cy.get('[data-cy="nav-link-logout"]').should('be.visible');
   });
 })

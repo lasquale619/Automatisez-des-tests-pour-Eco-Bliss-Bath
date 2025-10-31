@@ -7,7 +7,7 @@ module.exports = defineConfig({
     },
     baseUrl: "http://localhost:4200/#/",
     env: {
-      apiBase: "http://localhost:8081/",
+      apiUrl: "http://localhost:8081/",
       testEmail: "test2@test.fr",
       testMDP: "testtest"
     },
