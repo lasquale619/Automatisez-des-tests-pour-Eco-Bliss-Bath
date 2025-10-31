@@ -43,4 +43,52 @@ describe('smoke test', () => {
       cy.get('[data-cy="product-home"]').eq(i).should('be.visible');
     });
   });
+
+  it('la section mere nature est visible',()=>{
+    cy.get('section#nature').should('be.visible');    
+  });
+
+  it('image "mere nature" affiché',()=>{
+    cy.get('.image-nature img').should('have.attr','src', 'assets/images/nature.png').should('be.visible');
+  });
+
+  it('verfier le h2 de la section mere nature',()=>{
+    cy.get('.nature-content h2').should('contain.text', 'Mère Nature').should('be.visible');
+  });
+
+  it('verfier les p de la section mere nature',()=>{
+    cy.get('.nature-content p').should('have.length.at.least', 3).should('be.visible');
+  });
+
+  it('verfier la section nos valeurs',()=>{
+    cy.get('#values').should('be.visible');
+  });
+
+  it('verifier le titre principale',()=>{
+    cy.get('#values h2').should('be.visible');
+  });
+
+  it('verfier la liste des valeurs',()=>{
+    cy.get('#values .list-values .single-value').should('have.length', 3);
+  });
+
+  it('verfier que chaque valeur contient une image, un titre et un texte',()=>{
+    cy.get('#values .single-value').each(($el)=>{
+      cy.wrap($el).find('img').should('be.visible');
+      cy.wrap($el).find('h3').should('be.visible');
+      cy.wrap($el).find('p').should('be.visible');
+    });
+  });
+
+  it('verfier le footer',()=>{
+    cy.get('#main-footer').should('be.visible');
+  });
+
+  it('verfier le logo dans le footer',()=>{
+    cy.get('#main-footer img').should('be.visible').and('have.attr', 'src', 'assets/images/logo-footer.png');
+  });
+
+  it('verfier que Le lien du logo redirige vers la page accueil',()=>{
+    cy.get('#footer-logo a').should('have.attr', 'href').and('include', '/');
+  });
 })
