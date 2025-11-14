@@ -69,7 +69,7 @@ describe('Tests fonctionnels - Panier', () => {
     });
 
 
-    it('le stock doit être supérieur à 1 pour pouvoir être ajouté', () => {
+    it('Le stock doit être supérieur à 1 pour pouvoir être ajouté', () => {
         cy.visit('/products/4');
         cy.wait('@GetProduct4').then(() => {
             cy.get('[data-cy="detail-product-add"]').click();
@@ -84,7 +84,7 @@ describe('Tests fonctionnels - Panier', () => {
 
     });
 
-    it('vérifier que le produit a été ajouté au panier', () => {
+    it('Vérifier que le produit a été ajouté au panier', () => {
         cy.visit('/products/5');
         cy.get('[data-cy="detail-product-name"]').should('be.visible');
         cy.get('[data-cy="detail-product-add"]').click();
@@ -94,7 +94,7 @@ describe('Tests fonctionnels - Panier', () => {
 
     });
 
-    it('vérifier que le stock diminue après ajout au panier', () => {
+    it('Vérifier que le stock diminue après ajout au panier', () => {
         cy.visit('/products/9');
 
         cy.get('[data-cy="detail-product-stock"]')
@@ -126,7 +126,7 @@ describe('Tests fonctionnels - Panier', () => {
 
     });
 
-    it('vérifie que on ne peut pas ajouter au panier un produit avec une quantité négative', () => {
+    it('Vérifie que on ne peut pas ajouter au panier un produit avec une quantité négative', () => {
         cy.visit('/products/5');
         cy.wait('@GetProduct5').then(() => {
             cy.get('[data-cy="detail-product-quantity"]').clear().type('-5');
@@ -139,7 +139,7 @@ describe('Tests fonctionnels - Panier', () => {
 
     });
 
-    it('vérifie que on ne peut pas ajouter au panier un produit avec une quantité > a 20', () => {
+    it('Vérifie que on ne peut pas ajouter au panier un produit avec une quantité > a 20', () => {
         cy.visit('/products/5');
         cy.wait('@GetProduct5').then(() => {
             cy.get('[data-cy="detail-product-quantity"]').clear().type('25');
@@ -151,6 +151,32 @@ describe('Tests fonctionnels - Panier', () => {
             cy.get('[data-cy="cart-empty"]').should('be.visible');
         });
 
+    });
+
+    it('Ajoute un produit au panier et vérifie via API', () => {
+        cy.visit('/products/5');
+        cy.wait('@GetProduct5').then(() => {
+            cy.get('[data-cy="detail-product-add"]').click();
+        });
+        cy.request({
+            method: 'GET',
+            url: `${base}orders`,
+            headers: { Authorization: `bearer ${token}` },
+        }).then((Response) => {
+            expect(Response.status).to.eq(200);
+
+            const lines = Response.body.orderLines;
+            expect(lines.length).to.be.greaterThan(0);
+        });
+
+    });
+
+    it('Vérifiez la présence du champ de disponibilité du produit', () => {
+        cy.visit('/products/5');
+        cy.wait('@GetProduct5').then(()=>{
+            cy.get('[data-cy="detail-product-stock"]').should('be.visible');
+
+        });
     });
 
 })
