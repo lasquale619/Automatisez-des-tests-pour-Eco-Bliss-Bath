@@ -37,7 +37,7 @@ describe('Test API',()=>{
         });
     });
 
-    it('Api de recuperation de commande doit retourner status 401 ou 403 pour un utilisateur non authentifié',()=>{
+    it('Api de recuperation de commande doit retourner status 401 pour un utilisateur non authentifié',()=>{
         cy.request({
             method : 'GET',
             url : `${base}orders`,

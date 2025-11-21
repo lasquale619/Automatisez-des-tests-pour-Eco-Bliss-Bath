@@ -66,6 +66,7 @@ describe('Tests fonctionnels - Panier', () => {
         cy.intercept('PUT', '**/orders/add').as('addtocart');
         cy.intercept('GET', '**/products/4').as('GetProduct4');
         cy.intercept('GET', '**/products/5').as('GetProduct5');
+        cy.intercept('GET', '**/orders').as('GetCart');
     });
 
 
@@ -75,13 +76,11 @@ describe('Tests fonctionnels - Panier', () => {
             cy.get('[data-cy="detail-product-add"]').click();
             cy.wait('@addtocart').then(() => {
                 cy.visit('/cart');
-                cy.wait(1000);
-                cy.get('[data-cy="cart-empty"]').should('be.visible');
+                cy.wait('@GetCart').then(() => {
+                    cy.get('[data-cy="cart-empty"]').should('be.visible');
+                });
             });
-
         });
-
-
     });
 
     it('Vérifier que le produit a été ajouté au panier', () => {
@@ -131,10 +130,9 @@ describe('Tests fonctionnels - Panier', () => {
         cy.wait('@GetProduct5').then(() => {
             cy.get('[data-cy="detail-product-quantity"]').clear().type('-5');
             cy.get('[data-cy="detail-product-add"]').click();
-            cy.wait('@addtocart').then(() => {
-                cy.visit('/cart');
-                cy.get('[data-cy="cart-empty"]').should('be.visible');
-            });
+            cy.get('@addtocart.all').should('have.length', 0);
+            cy.visit('/cart');
+            cy.get('[data-cy="cart-empty"]').should('be.visible');
         });
 
     });
@@ -147,10 +145,10 @@ describe('Tests fonctionnels - Panier', () => {
         });
         cy.wait('@addtocart').then(() => {
             cy.visit('/cart');
-            cy.wait(1000)
-            cy.get('[data-cy="cart-empty"]').should('be.visible');
+            cy.wait('@GetCart').then(() => {
+                cy.get('[data-cy="cart-empty"]').should('be.visible');
+            });
         });
-
     });
 
     it('Ajoute un produit au panier et vérifie via API', () => {
@@ -173,7 +171,7 @@ describe('Tests fonctionnels - Panier', () => {
 
     it('Vérifiez la présence du champ de disponibilité du produit', () => {
         cy.visit('/products/5');
-        cy.wait('@GetProduct5').then(()=>{
+        cy.wait('@GetProduct5').then(() => {
             cy.get('[data-cy="detail-product-stock"]').should('be.visible');
 
         });
