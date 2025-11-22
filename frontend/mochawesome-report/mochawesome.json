@@ -1,0 +1,261 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 9,
+    "passes": 7,
+    "pending": 0,
+    "failures": 2,
+    "start": "2025-11-22T01:03:08.179Z",
+    "end": "2025-11-22T01:03:11.364Z",
+    "duration": 3185,
+    "testsRegistered": 9,
+    "passPercent": 77.77777777777779,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "b8889bb4-0820-4f92-8493-16b8580dba69",
+      "title": "",
+      "fullFile": "cypress\\e2e\\api.cy.js",
+      "file": "cypress\\e2e\\api.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "6bba3fc2-7505-4893-a861-41d34dd58579",
+          "title": "Test API",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Api doit retourner status 401 pour un utilisateur inconnu",
+              "fullTitle": "Test API Api doit retourner status 401 pour un utilisateur inconnu",
+              "timedOut": null,
+              "duration": 177,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: `${base}login`,\n  failOnStatusCode: false,\n  body: {\n    username: 'ttt@test.fr',\n    password: 'kjnfue'\n  }\n}).then(Response => {\n  expect(Response.status).to.eq(401);\n});",
+              "err": {},
+              "uuid": "7f8480b5-650a-4dec-a552-0c3da9e6867b",
+              "parentUUID": "6bba3fc2-7505-4893-a861-41d34dd58579",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Api doit retourner status 200 et un token pour un utilisateur valide",
+              "fullTitle": "Test API Api doit retourner status 200 et un token pour un utilisateur valide",
+              "timedOut": null,
+              "duration": 667,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: `${base}login`,\n  body: {\n    username,\n    password\n  }\n}).then(Response => {\n  expect(Response.status).to.eq(200);\n  expect(Response.body).to.have.property('token');\n  token = Response.body.token;\n});",
+              "err": {},
+              "uuid": "1c0f08b8-141e-44d1-bd92-58ca0ab0405c",
+              "parentUUID": "6bba3fc2-7505-4893-a861-41d34dd58579",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Api de recuperation de commande doit retourner status 401 pour un utilisateur non authentifié",
+              "fullTitle": "Test API Api de recuperation de commande doit retourner status 401 pour un utilisateur non authentifié",
+              "timedOut": null,
+              "duration": 125,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${base}orders`,\n  failOnStatusCode: false,\n  body: {\n    username: 'ttt@test.fr',\n    password: 'kjnfue'\n  }\n}).then(Response => {\n  expect(Response.status).to.eq(401);\n});",
+              "err": {},
+              "uuid": "62f2b6b5-3ff9-469f-9310-368c3145c4cf",
+              "parentUUID": "6bba3fc2-7505-4893-a861-41d34dd58579",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Api de recuperation de produits doit retourner une liste de produits",
+              "fullTitle": "Test API Api de recuperation de produits doit retourner une liste de produits",
+              "timedOut": null,
+              "duration": 172,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${base}products`\n}).then(Response => {\n  expect(Response.status).to.eq(200);\n  expect(Response.body).to.be.an('array').and.to.have.length.greaterThan(0);\n  productId = Response.body[0].id;\n});",
+              "err": {},
+              "uuid": "8abfe1a4-82e0-4fa4-904b-df891ab156aa",
+              "parentUUID": "6bba3fc2-7505-4893-a861-41d34dd58579",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Api de recuperation de produits/id doit retourner la fiche du produit demandé",
+              "fullTitle": "Test API Api de recuperation de produits/id doit retourner la fiche du produit demandé",
+              "timedOut": null,
+              "duration": 144,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${base}products`\n}).then(Response => {\n  expect(Response.status).to.eq(200);\n  expect(Response.body[0]).to.have.property('id', productId);\n});",
+              "err": {},
+              "uuid": "dc4723f9-9318-4127-8f46-d84d9a04493a",
+              "parentUUID": "6bba3fc2-7505-4893-a861-41d34dd58579",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Api de recuperation de commande doit retourner la liste des produits du panier après connexion",
+              "fullTitle": "Test API Api de recuperation de commande doit retourner la liste des produits du panier après connexion",
+              "timedOut": null,
+              "duration": 199,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'GET',\n  url: `${base}orders`,\n  headers: {\n    Authorization: `Bearer ${token}`\n  }\n}).then(Response => {\n  expect(Response.status).to.eq(200);\n  expect(Response.body).to.be.an('object').and.not.be.empty;\n});",
+              "err": {},
+              "uuid": "d0f8a76e-3748-468d-80f1-20aa6b6f600e",
+              "parentUUID": "6bba3fc2-7505-4893-a861-41d34dd58579",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Api pour ajout de commande doit ajouter un produit disponible au panier",
+              "fullTitle": "Test API Api pour ajout de commande doit ajouter un produit disponible au panier",
+              "timedOut": null,
+              "duration": 425,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: `${base}orders/add`,\n  headers: {\n    Authorization: `Bearer ${token}`\n  },\n  body: {\n    product: productId,\n    quantity: 1\n  }\n}).then(Response => {\n  expect(Response.status).to.eq(200);\n});",
+              "err": {
+                "message": "CypressError: `cy.request()` failed on:\n\nhttp://localhost:8081/orders/add\n\nThe response we received from your web server was:\n\n  > 405: Method Not Allowed\n\nThis was considered a failure because the status code was not `2xx` or `3xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\n-----------------------------------------------------------\n\nThe request we sent was:\n\nMethod: POST\nURL: http://localhost:8081/orders/add\nHeaders: {\n  \"Connection\": \"keep-alive\",\n  \"Authorization\": \"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NjM3NzMzODksImV4cCI6MTc2Mzc3Njk4OSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.FVP-n3rreATbYm_wcABR2zwEDHPnLNvgY8POZh66fE6k5y1Z9NgV-DSwx8EaFXQgSTHaAFcMB6Wp3bKtIG0QeXdpGZ8zG5fl3MO6iDq-ltPkN2P0eQe_izPcLUvgH5Pshth7yWcHY-07qQN3RH4n9hdjd1GBwP2Db08wi_XEnTv385U-isftJMyhIivIRwfqaluD71Fi-XiA84cvNskIz04XYkfLCirNfwBy7Kr3jqi83x80L1YejNwrMTgsVioxdcNsMqkpmN5pjUfoHNknYaZfy1dSNGjgFhDZZMZviPWtjcDUWexKW-0E4IzuOoipOBcinKQorwjffWJ3YigKzg\",\n  \"user-agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/15.5.0 Chrome/138.0.7204.251 Electron/37.6.0 Safari/537.36\",\n  \"accept\": \"*/*\",\n  \"accept-encoding\": \"gzip, deflate\",\n  \"content-type\": \"application/json\",\n  \"content-length\": 26\n}\nBody: {\"product\":3,\"quantity\":1}\n\n-----------------------------------------------------------\n\nThe response we got was:\n\nStatus: 405 - Method Not Allowed\nHeaders: {\n  \"host\": \"localhost:8081\",\n  \"connection\": \"close\",\n  \"x-powered-by\": \"PHP/8.1.32\",\n  \"content-type\": \"text/html; charset=UTF-8\",\n  \"x-debug-exception\": \"No%20route%20found%20for%20%22POST%20http%3A%2F%2Flocalhost%3A8081%2Forders%2Fadd%22%3A%20Method%20Not%20Allowed%20%28Allow%3A%20PUT%29\",\n  \"x-debug-exception-file\": \"%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fsymfony%2Fhttp-kernel%2FEventListener%2FRouterListener.php:139\",\n  \"allow\": \"PUT\",\n  \"cache-control\": \"no-cache, private\",\n  \"date\": \"Sat, 22 Nov 2025 01:03:09 GMT\",\n  \"x-robots-tag\": \"noindex\"\n}\nBody: <!-- No route found for &quot;POST http://localhost:8081/orders/add&quot;: Method Not Allowed (Allow: PUT) (405 Method Not Allowed) -->\n<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\" />\n        <meta name=\"robots\" content=\"noindex,nofollow\" />\n        <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n        <title>No route found for &quot;POST http://localhost:8081/orders/add&quot;: Method Not Allowed (Allow: PUT) (405 Method Not Allowed)</title>\n        <link rel=\"icon\" type=\"image/png\" href=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAgCAYAAAABtRhCAAADVUlEQVRIx82XX0jTURTHLYPyqZdefQx66CEo80+aYpoIkqzUikz6Z5klQoWUWYRIJYEUGpQ+lIr9U5dOTLdCtkmWZis3rbnC5fw/neYW002307mX/cZvP3/7o1PwwOdh95x7vnf39zvnd29AgBer2xO6DclAXiMqZAqxIiNIN/IYSUS2BPhjmGATchUxI+ADWiRhpWK7HKuHFVBFdmU5YvnI4grFGCaReF/EBH4KsZlGgj2JBTuCYBWRIYF8YoEOJ6wBt/gEs7mBbyOjQXruPLSdOgPCiEiPSUUHDoL8Ug5IUo9B/d5wrt+G7OAKNrODPuVdB6vRCIzN6SdBlpW9RIgk/1FeAXabzRlrUPVCS/JhbmwudztnGeeH9AyXBIwtmM3wLinZJZHifjHw2V+NBoRh+9ixQrbgbnaSIcl7cGea6hoXQbNe7za241oeO5Z0p42M4BV2EqP2D50wo+6HzvwC6C4sApNOR8cmOrtcnhtj2kYRyC9eBvXzKrBZrXSs72kFd1t3MoKVbMekQkEnSNKOO8fac3LpmK6l1TlGtsxmsdKFsecPYgwxst0cwROMYDXboSotg0WLBRqjY51jLYcENElXwW2XJKPydvoI2GN9T8rBtrAArYIUruBJXkFheCQYlCpQP6uk5dAQFQNaUROMSGVQFxLmkoQsxDJrhLbTZ+nvVsERME9MgPJRKV/58AsyomTSzE813WLFvWK++qI0xSfQl8k8Pg46sYRuv5t6dS+4RqxDwaa4BGjYH+NTQvKScIp9+YL/hoZh3jDtLRHtt2C3g6bmhX+CpsFBWg7ilDSPgj0lD2ncr5ev/BP8VvyAJhqVyZeUhPOrEhEFxgEtjft846Z/guQTNT89Q5P9flMLoth4F7808wKtWWKzAwNQHxrh/1vaid2F+XpYTSbQf1XA2McOmOpROnvpvMEA4tSjq1cW0sws2gCYxswY6TKkvzYnJq1NHZLnRU4BX+4U0uburvusu8Kv8iHY7qefkM4IFngJHEOUXmLEPgiGsI8YnlZILit3vSSLRTQe/MPIZva5pshNIEmyFQlCvruJKXPkCEfmePzkphXHdzZNQdoRI9KPlBAxlj/I8U97ERPS5bjGbWDFbEdqHVe5caTBeZZx2H/IMvzeN15yoQAAAABJRU5ErkJggg==\">\n        <style>/* This file is based on WebProfilerBundle/Resources/views/Profiler/profiler.css.twig.\n   If you make any change in this file, verify the same change is needed in the other file. */\n:root {\n    ...\n\n\nhttps://on.cypress.io/request",
+                "estack": "CypressError: `cy.request()` failed on:\n\nhttp://localhost:8081/orders/add\n\nThe response we received from your web server was:\n\n  > 405: Method Not Allowed\n\nThis was considered a failure because the status code was not `2xx` or `3xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\n-----------------------------------------------------------\n\nThe request we sent was:\n\nMethod: POST\nURL: http://localhost:8081/orders/add\nHeaders: {\n  \"Connection\": \"keep-alive\",\n  \"Authorization\": \"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NjM3NzMzODksImV4cCI6MTc2Mzc3Njk4OSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.FVP-n3rreATbYm_wcABR2zwEDHPnLNvgY8POZh66fE6k5y1Z9NgV-DSwx8EaFXQgSTHaAFcMB6Wp3bKtIG0QeXdpGZ8zG5fl3MO6iDq-ltPkN2P0eQe_izPcLUvgH5Pshth7yWcHY-07qQN3RH4n9hdjd1GBwP2Db08wi_XEnTv385U-isftJMyhIivIRwfqaluD71Fi-XiA84cvNskIz04XYkfLCirNfwBy7Kr3jqi83x80L1YejNwrMTgsVioxdcNsMqkpmN5pjUfoHNknYaZfy1dSNGjgFhDZZMZviPWtjcDUWexKW-0E4IzuOoipOBcinKQorwjffWJ3YigKzg\",\n  \"user-agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/15.5.0 Chrome/138.0.7204.251 Electron/37.6.0 Safari/537.36\",\n  \"accept\": \"*/*\",\n  \"accept-encoding\": \"gzip, deflate\",\n  \"content-type\": \"application/json\",\n  \"content-length\": 26\n}\nBody: {\"product\":3,\"quantity\":1}\n\n-----------------------------------------------------------\n\nThe response we got was:\n\nStatus: 405 - Method Not Allowed\nHeaders: {\n  \"host\": \"localhost:8081\",\n  \"connection\": \"close\",\n  \"x-powered-by\": \"PHP/8.1.32\",\n  \"content-type\": \"text/html; charset=UTF-8\",\n  \"x-debug-exception\": \"No%20route%20found%20for%20%22POST%20http%3A%2F%2Flocalhost%3A8081%2Forders%2Fadd%22%3A%20Method%20Not%20Allowed%20%28Allow%3A%20PUT%29\",\n  \"x-debug-exception-file\": \"%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fsymfony%2Fhttp-kernel%2FEventListener%2FRouterListener.php:139\",\n  \"allow\": \"PUT\",\n  \"cache-control\": \"no-cache, private\",\n  \"date\": \"Sat, 22 Nov 2025 01:03:09 GMT\",\n  \"x-robots-tag\": \"noindex\"\n}\nBody: <!-- No route found for &quot;POST http://localhost:8081/orders/add&quot;: Method Not Allowed (Allow: PUT) (405 Method Not Allowed) -->\n<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\" />\n        <meta name=\"robots\" content=\"noindex,nofollow\" />\n        <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n        <title>No route found for &quot;POST http://localhost:8081/orders/add&quot;: Method Not Allowed (Allow: PUT) (405 Method Not Allowed)</title>\n        <link rel=\"icon\" type=\"image/png\" href=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAgCAYAAAABtRhCAAADVUlEQVRIx82XX0jTURTHLYPyqZdefQx66CEo80+aYpoIkqzUikz6Z5klQoWUWYRIJYEUGpQ+lIr9U5dOTLdCtkmWZis3rbnC5fw/neYW002307mX/cZvP3/7o1PwwOdh95x7vnf39zvnd29AgBer2xO6DclAXiMqZAqxIiNIN/IYSUS2BPhjmGATchUxI+ADWiRhpWK7HKuHFVBFdmU5YvnI4grFGCaReF/EBH4KsZlGgj2JBTuCYBWRIYF8YoEOJ6wBt/gEs7mBbyOjQXruPLSdOgPCiEiPSUUHDoL8Ug5IUo9B/d5wrt+G7OAKNrODPuVdB6vRCIzN6SdBlpW9RIgk/1FeAXabzRlrUPVCS/JhbmwudztnGeeH9AyXBIwtmM3wLinZJZHifjHw2V+NBoRh+9ixQrbgbnaSIcl7cGea6hoXQbNe7za241oeO5Z0p42M4BV2EqP2D50wo+6HzvwC6C4sApNOR8cmOrtcnhtj2kYRyC9eBvXzKrBZrXSs72kFd1t3MoKVbMekQkEnSNKOO8fac3LpmK6l1TlGtsxmsdKFsecPYgwxst0cwROMYDXboSotg0WLBRqjY51jLYcENElXwW2XJKPydvoI2GN9T8rBtrAArYIUruBJXkFheCQYlCpQP6uk5dAQFQNaUROMSGVQFxLmkoQsxDJrhLbTZ+nvVsERME9MgPJRKV/58AsyomTSzE813WLFvWK++qI0xSfQl8k8Pg46sYRuv5t6dS+4RqxDwaa4BGjYH+NTQvKScIp9+YL/hoZh3jDtLRHtt2C3g6bmhX+CpsFBWg7ilDSPgj0lD2ncr5ev/BP8VvyAJhqVyZeUhPOrEhEFxgEtjft846Z/guQTNT89Q5P9flMLoth4F7808wKtWWKzAwNQHxrh/1vaid2F+XpYTSbQf1XA2McOmOpROnvpvMEA4tSjq1cW0sws2gCYxswY6TKkvzYnJq1NHZLnRU4BX+4U0uburvusu8Kv8iHY7qefkM4IFngJHEOUXmLEPgiGsI8YnlZILit3vSSLRTQe/MPIZva5pshNIEmyFQlCvruJKXPkCEfmePzkphXHdzZNQdoRI9KPlBAxlj/I8U97ERPS5bjGbWDFbEdqHVe5caTBeZZx2H/IMvzeN15yoQAAAABJRU5ErkJggg==\">\n        <style>/* This file is based on WebProfilerBundle/Resources/views/Profiler/profiler.css.twig.\n   If you make any change in this file, verify the same change is needed in the other file. */\n:root {\n    ...\n\n\nhttps://on.cypress.io/request\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:135685:72)\n    at tryCatcher (http://localhost:4200/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (http://localhost:4200/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (http://localhost:4200/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (http://localhost:4200/__cypress/runner/cypress_runner.js:1591:10)\n    at Promise._settlePromises (http://localhost:4200/__cypress/runner/cypress_runner.js:1671:18)\n    at _drainQueueStep (http://localhost:4200/__cypress/runner/cypress_runner.js:2377:12)\n    at _drainQueue (http://localhost:4200/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2386:5)\n    at Async.drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2256:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://eco-bliss-bath/./cypress/e2e/api.cy.js:89:11)",
+                "diff": null
+              },
+              "uuid": "24194597-4253-4195-9bd5-7145435956f3",
+              "parentUUID": "6bba3fc2-7505-4893-a861-41d34dd58579",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Api pour ajout de commande doit renvoyer une erreur si le produit est en rupture de stock",
+              "fullTitle": "Test API Api pour ajout de commande doit renvoyer une erreur si le produit est en rupture de stock",
+              "timedOut": null,
+              "duration": 379,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: `${base}orders/add`,\n  headers: {\n    Authorization: `Bearer ${token}`\n  },\n  body: {\n    product: 3,\n    quantity: 5\n  }\n}).then(Response => {\n  expect(Response.status).to.not.equal(200);\n});",
+              "err": {
+                "message": "CypressError: `cy.request()` failed on:\n\nhttp://localhost:8081/orders/add\n\nThe response we received from your web server was:\n\n  > 405: Method Not Allowed\n\nThis was considered a failure because the status code was not `2xx` or `3xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\n-----------------------------------------------------------\n\nThe request we sent was:\n\nMethod: POST\nURL: http://localhost:8081/orders/add\nHeaders: {\n  \"Connection\": \"keep-alive\",\n  \"Authorization\": \"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NjM3NzMzODksImV4cCI6MTc2Mzc3Njk4OSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.FVP-n3rreATbYm_wcABR2zwEDHPnLNvgY8POZh66fE6k5y1Z9NgV-DSwx8EaFXQgSTHaAFcMB6Wp3bKtIG0QeXdpGZ8zG5fl3MO6iDq-ltPkN2P0eQe_izPcLUvgH5Pshth7yWcHY-07qQN3RH4n9hdjd1GBwP2Db08wi_XEnTv385U-isftJMyhIivIRwfqaluD71Fi-XiA84cvNskIz04XYkfLCirNfwBy7Kr3jqi83x80L1YejNwrMTgsVioxdcNsMqkpmN5pjUfoHNknYaZfy1dSNGjgFhDZZMZviPWtjcDUWexKW-0E4IzuOoipOBcinKQorwjffWJ3YigKzg\",\n  \"user-agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/15.5.0 Chrome/138.0.7204.251 Electron/37.6.0 Safari/537.36\",\n  \"accept\": \"*/*\",\n  \"accept-encoding\": \"gzip, deflate\",\n  \"content-type\": \"application/json\",\n  \"content-length\": 26\n}\nBody: {\"product\":3,\"quantity\":5}\n\n-----------------------------------------------------------\n\nThe response we got was:\n\nStatus: 405 - Method Not Allowed\nHeaders: {\n  \"host\": \"localhost:8081\",\n  \"connection\": \"close\",\n  \"x-powered-by\": \"PHP/8.1.32\",\n  \"content-type\": \"text/html; charset=UTF-8\",\n  \"x-debug-exception\": \"No%20route%20found%20for%20%22POST%20http%3A%2F%2Flocalhost%3A8081%2Forders%2Fadd%22%3A%20Method%20Not%20Allowed%20%28Allow%3A%20PUT%29\",\n  \"x-debug-exception-file\": \"%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fsymfony%2Fhttp-kernel%2FEventListener%2FRouterListener.php:139\",\n  \"allow\": \"PUT\",\n  \"cache-control\": \"no-cache, private\",\n  \"date\": \"Sat, 22 Nov 2025 01:03:10 GMT\",\n  \"x-robots-tag\": \"noindex\"\n}\nBody: <!-- No route found for &quot;POST http://localhost:8081/orders/add&quot;: Method Not Allowed (Allow: PUT) (405 Method Not Allowed) -->\n<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\" />\n        <meta name=\"robots\" content=\"noindex,nofollow\" />\n        <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n        <title>No route found for &quot;POST http://localhost:8081/orders/add&quot;: Method Not Allowed (Allow: PUT) (405 Method Not Allowed)</title>\n        <link rel=\"icon\" type=\"image/png\" href=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAgCAYAAAABtRhCAAADVUlEQVRIx82XX0jTURTHLYPyqZdefQx66CEo80+aYpoIkqzUikz6Z5klQoWUWYRIJYEUGpQ+lIr9U5dOTLdCtkmWZis3rbnC5fw/neYW002307mX/cZvP3/7o1PwwOdh95x7vnf39zvnd29AgBer2xO6DclAXiMqZAqxIiNIN/IYSUS2BPhjmGATchUxI+ADWiRhpWK7HKuHFVBFdmU5YvnI4grFGCaReF/EBH4KsZlGgj2JBTuCYBWRIYF8YoEOJ6wBt/gEs7mBbyOjQXruPLSdOgPCiEiPSUUHDoL8Ug5IUo9B/d5wrt+G7OAKNrODPuVdB6vRCIzN6SdBlpW9RIgk/1FeAXabzRlrUPVCS/JhbmwudztnGeeH9AyXBIwtmM3wLinZJZHifjHw2V+NBoRh+9ixQrbgbnaSIcl7cGea6hoXQbNe7za241oeO5Z0p42M4BV2EqP2D50wo+6HzvwC6C4sApNOR8cmOrtcnhtj2kYRyC9eBvXzKrBZrXSs72kFd1t3MoKVbMekQkEnSNKOO8fac3LpmK6l1TlGtsxmsdKFsecPYgwxst0cwROMYDXboSotg0WLBRqjY51jLYcENElXwW2XJKPydvoI2GN9T8rBtrAArYIUruBJXkFheCQYlCpQP6uk5dAQFQNaUROMSGVQFxLmkoQsxDJrhLbTZ+nvVsERME9MgPJRKV/58AsyomTSzE813WLFvWK++qI0xSfQl8k8Pg46sYRuv5t6dS+4RqxDwaa4BGjYH+NTQvKScIp9+YL/hoZh3jDtLRHtt2C3g6bmhX+CpsFBWg7ilDSPgj0lD2ncr5ev/BP8VvyAJhqVyZeUhPOrEhEFxgEtjft846Z/guQTNT89Q5P9flMLoth4F7808wKtWWKzAwNQHxrh/1vaid2F+XpYTSbQf1XA2McOmOpROnvpvMEA4tSjq1cW0sws2gCYxswY6TKkvzYnJq1NHZLnRU4BX+4U0uburvusu8Kv8iHY7qefkM4IFngJHEOUXmLEPgiGsI8YnlZILit3vSSLRTQe/MPIZva5pshNIEmyFQlCvruJKXPkCEfmePzkphXHdzZNQdoRI9KPlBAxlj/I8U97ERPS5bjGbWDFbEdqHVe5caTBeZZx2H/IMvzeN15yoQAAAABJRU5ErkJggg==\">\n        <style>/* This file is based on WebProfilerBundle/Resources/views/Profiler/profiler.css.twig.\n   If you make any change in this file, verify the same change is needed in the other file. */\n:root {\n    ...\n\n\nhttps://on.cypress.io/request",
+                "estack": "CypressError: `cy.request()` failed on:\n\nhttp://localhost:8081/orders/add\n\nThe response we received from your web server was:\n\n  > 405: Method Not Allowed\n\nThis was considered a failure because the status code was not `2xx` or `3xx`.\n\nIf you do not want status codes to cause failures pass the option: `failOnStatusCode: false`\n\n-----------------------------------------------------------\n\nThe request we sent was:\n\nMethod: POST\nURL: http://localhost:8081/orders/add\nHeaders: {\n  \"Connection\": \"keep-alive\",\n  \"Authorization\": \"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NjM3NzMzODksImV4cCI6MTc2Mzc3Njk4OSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidGVzdDJAdGVzdC5mciJ9.FVP-n3rreATbYm_wcABR2zwEDHPnLNvgY8POZh66fE6k5y1Z9NgV-DSwx8EaFXQgSTHaAFcMB6Wp3bKtIG0QeXdpGZ8zG5fl3MO6iDq-ltPkN2P0eQe_izPcLUvgH5Pshth7yWcHY-07qQN3RH4n9hdjd1GBwP2Db08wi_XEnTv385U-isftJMyhIivIRwfqaluD71Fi-XiA84cvNskIz04XYkfLCirNfwBy7Kr3jqi83x80L1YejNwrMTgsVioxdcNsMqkpmN5pjUfoHNknYaZfy1dSNGjgFhDZZMZviPWtjcDUWexKW-0E4IzuOoipOBcinKQorwjffWJ3YigKzg\",\n  \"user-agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Cypress/15.5.0 Chrome/138.0.7204.251 Electron/37.6.0 Safari/537.36\",\n  \"accept\": \"*/*\",\n  \"accept-encoding\": \"gzip, deflate\",\n  \"content-type\": \"application/json\",\n  \"content-length\": 26\n}\nBody: {\"product\":3,\"quantity\":5}\n\n-----------------------------------------------------------\n\nThe response we got was:\n\nStatus: 405 - Method Not Allowed\nHeaders: {\n  \"host\": \"localhost:8081\",\n  \"connection\": \"close\",\n  \"x-powered-by\": \"PHP/8.1.32\",\n  \"content-type\": \"text/html; charset=UTF-8\",\n  \"x-debug-exception\": \"No%20route%20found%20for%20%22POST%20http%3A%2F%2Flocalhost%3A8081%2Forders%2Fadd%22%3A%20Method%20Not%20Allowed%20%28Allow%3A%20PUT%29\",\n  \"x-debug-exception-file\": \"%2Fvar%2Fwww%2Fhtml%2Fvendor%2Fsymfony%2Fhttp-kernel%2FEventListener%2FRouterListener.php:139\",\n  \"allow\": \"PUT\",\n  \"cache-control\": \"no-cache, private\",\n  \"date\": \"Sat, 22 Nov 2025 01:03:10 GMT\",\n  \"x-robots-tag\": \"noindex\"\n}\nBody: <!-- No route found for &quot;POST http://localhost:8081/orders/add&quot;: Method Not Allowed (Allow: PUT) (405 Method Not Allowed) -->\n<!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"UTF-8\" />\n        <meta name=\"robots\" content=\"noindex,nofollow\" />\n        <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />\n        <title>No route found for &quot;POST http://localhost:8081/orders/add&quot;: Method Not Allowed (Allow: PUT) (405 Method Not Allowed)</title>\n        <link rel=\"icon\" type=\"image/png\" href=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAgCAYAAAABtRhCAAADVUlEQVRIx82XX0jTURTHLYPyqZdefQx66CEo80+aYpoIkqzUikz6Z5klQoWUWYRIJYEUGpQ+lIr9U5dOTLdCtkmWZis3rbnC5fw/neYW002307mX/cZvP3/7o1PwwOdh95x7vnf39zvnd29AgBer2xO6DclAXiMqZAqxIiNIN/IYSUS2BPhjmGATchUxI+ADWiRhpWK7HKuHFVBFdmU5YvnI4grFGCaReF/EBH4KsZlGgj2JBTuCYBWRIYF8YoEOJ6wBt/gEs7mBbyOjQXruPLSdOgPCiEiPSUUHDoL8Ug5IUo9B/d5wrt+G7OAKNrODPuVdB6vRCIzN6SdBlpW9RIgk/1FeAXabzRlrUPVCS/JhbmwudztnGeeH9AyXBIwtmM3wLinZJZHifjHw2V+NBoRh+9ixQrbgbnaSIcl7cGea6hoXQbNe7za241oeO5Z0p42M4BV2EqP2D50wo+6HzvwC6C4sApNOR8cmOrtcnhtj2kYRyC9eBvXzKrBZrXSs72kFd1t3MoKVbMekQkEnSNKOO8fac3LpmK6l1TlGtsxmsdKFsecPYgwxst0cwROMYDXboSotg0WLBRqjY51jLYcENElXwW2XJKPydvoI2GN9T8rBtrAArYIUruBJXkFheCQYlCpQP6uk5dAQFQNaUROMSGVQFxLmkoQsxDJrhLbTZ+nvVsERME9MgPJRKV/58AsyomTSzE813WLFvWK++qI0xSfQl8k8Pg46sYRuv5t6dS+4RqxDwaa4BGjYH+NTQvKScIp9+YL/hoZh3jDtLRHtt2C3g6bmhX+CpsFBWg7ilDSPgj0lD2ncr5ev/BP8VvyAJhqVyZeUhPOrEhEFxgEtjft846Z/guQTNT89Q5P9flMLoth4F7808wKtWWKzAwNQHxrh/1vaid2F+XpYTSbQf1XA2McOmOpROnvpvMEA4tSjq1cW0sws2gCYxswY6TKkvzYnJq1NHZLnRU4BX+4U0uburvusu8Kv8iHY7qefkM4IFngJHEOUXmLEPgiGsI8YnlZILit3vSSLRTQe/MPIZva5pshNIEmyFQlCvruJKXPkCEfmePzkphXHdzZNQdoRI9KPlBAxlj/I8U97ERPS5bjGbWDFbEdqHVe5caTBeZZx2H/IMvzeN15yoQAAAABJRU5ErkJggg==\">\n        <style>/* This file is based on WebProfilerBundle/Resources/views/Profiler/profiler.css.twig.\n   If you make any change in this file, verify the same change is needed in the other file. */\n:root {\n    ...\n\n\nhttps://on.cypress.io/request\n    at <unknown> (http://localhost:4200/__cypress/runner/cypress_runner.js:135685:72)\n    at tryCatcher (http://localhost:4200/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise._settlePromiseFromHandler (http://localhost:4200/__cypress/runner/cypress_runner.js:1489:31)\n    at Promise._settlePromise (http://localhost:4200/__cypress/runner/cypress_runner.js:1546:18)\n    at Promise._settlePromise0 (http://localhost:4200/__cypress/runner/cypress_runner.js:1591:10)\n    at Promise._settlePromises (http://localhost:4200/__cypress/runner/cypress_runner.js:1671:18)\n    at _drainQueueStep (http://localhost:4200/__cypress/runner/cypress_runner.js:2377:12)\n    at _drainQueue (http://localhost:4200/__cypress/runner/cypress_runner.js:2370:9)\n    at Async._drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2386:5)\n    at Async.drainQueues (http://localhost:4200/__cypress/runner/cypress_runner.js:2256:14)\nFrom Your Spec Code:\n    at Context.eval (webpack://eco-bliss-bath/./cypress/e2e/api.cy.js:105:11)",
+                "diff": null
+              },
+              "uuid": "bbd99054-6479-453b-b3a5-b8d194dfe07a",
+              "parentUUID": "6bba3fc2-7505-4893-a861-41d34dd58579",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Api pour ajout un avis doit retourner status 200",
+              "fullTitle": "Test API Api pour ajout un avis doit retourner status 200",
+              "timedOut": null,
+              "duration": 209,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: `${base}reviews`,\n  headers: {\n    Authorization: `Bearer ${token}`\n  },\n  body: {\n    title: 'super',\n    rating: 5,\n    comment: 'super produit'\n  }\n}).then(Response => {\n  expect(Response.status).to.eq(200);\n  expect(Response.body).to.have.property('id');\n  expect(Response.body).to.have.property('date');\n  expect(Response.body).to.have.property('title', 'super');\n  expect(Response.body).to.have.property('comment');\n  expect(Response.body).to.have.property('rating');\n  expect(Response.body).to.have.property('author');\n});",
+              "err": {},
+              "uuid": "9744ef2b-9b13-452a-85d5-41b7e945e03c",
+              "parentUUID": "6bba3fc2-7505-4893-a861-41d34dd58579",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "7f8480b5-650a-4dec-a552-0c3da9e6867b",
+            "1c0f08b8-141e-44d1-bd92-58ca0ab0405c",
+            "62f2b6b5-3ff9-469f-9310-368c3145c4cf",
+            "8abfe1a4-82e0-4fa4-904b-df891ab156aa",
+            "dc4723f9-9318-4127-8f46-d84d9a04493a",
+            "d0f8a76e-3748-468d-80f1-20aa6b6f600e",
+            "9744ef2b-9b13-452a-85d5-41b7e945e03c"
+          ],
+          "failures": [
+            "24194597-4253-4195-9bd5-7145435956f3",
+            "bbd99054-6479-453b-b3a5-b8d194dfe07a"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 2497,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}

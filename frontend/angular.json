@@ -18,7 +18,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/eco-bliss-bath",
             "index": "src/index.html",
@@ -37,6 +37,9 @@
           },
           "configurations": {
             "production": {
+              "customWebpackConfig": {
+                "path": "./coverage.webpack.js"
+              },
               "budgets": [
                 {
                   "type": "initial",
@@ -58,6 +61,9 @@
               "outputHashing": "all"
             },
             "development": {
+              "customWebpackConfig": {
+                "path": "./coverage.webpack.js"
+              },
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -69,7 +75,10 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
+          "options": {
+            "browserTarget": "EcoBlissBath:build"
+          },
           "configurations": {
             "production": {
               "browserTarget": "EcoBlissBath:build:production"

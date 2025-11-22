@@ -26,15 +26,49 @@ Pour démarrer l'API avec ça base de données.
 ```
 docker compose up -d
 ```
-# Pour démarrer le frontend de l'applicatif
+# Pour Installez les dépendances du projet
 Rendez-vous dans le dossier frontend
 ```
 cd ./frontend
 ```
-Installez les dépendances du projet
-```
 npm i
+```
 ou
 npm install (si vous préférez)
 ```
+# démarrer le frontend 
+Toujours dans le dossier frontend
+```
+npm start
+``` 
+
+# Ouvriri Cypress
+Toujours dans le dossier frontend
+```
+
+npx cypress open
+```
+Puis 
+```
+
+Sélectionner E2E Testing
+
+Choisir le navigateur
+
+Lancer les fichiers de tests souhaités
+```
+# Générer un rapport de tests (Mochawesome)
+npx cypress run --reporter mochawesome
+```
+A la fin des tests
+```
+Rendez-vous dans le dossier frontend/mochawesome-report
+```
+cliquer sur le fichier html
+```
+
+
+
+
+
 

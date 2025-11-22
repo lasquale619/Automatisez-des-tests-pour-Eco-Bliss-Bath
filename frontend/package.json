@@ -6,7 +6,12 @@
     "start": "ng serve",
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "cypress:run": "cypress run",
+    "cypress:open": "cypress open",
+    "cypress:report": "mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/report.json && marge cypress/reports/mochawesome/report.json -f report -o cypress/reports/mochawesome",
+    "test:e2e": "cypress run && npm run cypress:report",
+    "test:e2e:report": "cypress run && mochawesome-merge cypress/reports/*.json > cypress/reports/report.json && marge cypress/reports/report.json -f report -o cypress/reports"
   },
   "private": true,
   "dependencies": {
@@ -23,9 +28,11 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^13.1.0",
     "@angular-devkit/build-angular": "~13.3.0",
     "@angular/cli": "~13.3.0",
     "@angular/compiler-cli": "~13.3.0",
+    "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~4.0.0",
@@ -34,6 +41,9 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.2",
     "typescript": "~4.6.2"
   }
 }

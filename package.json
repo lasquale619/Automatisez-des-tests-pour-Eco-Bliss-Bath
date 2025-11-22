@@ -1,6 +1,17 @@
 {
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^20.0.0",
+    "@cypress/code-coverage": "^3.14.7",
     "@faker-js/faker": "^10.1.0",
-    "cypress": "^15.5.0"
+    "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
+    "cypress": "^15.5.0",
+    "istanbul-lib-coverage": "^3.2.2",
+    "istanbul-lib-instrument": "^6.0.3",
+    "istanbul-lib-report": "^3.0.1",
+    "istanbul-reports": "^3.2.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.2",
+    "nyc": "^17.1.0"
   }
 }

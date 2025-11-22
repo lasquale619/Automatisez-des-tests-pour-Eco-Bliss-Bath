@@ -1,0 +1,37 @@
+# Dépendances
+node_modules/
+frontend/node_modules/
+
+# Build Angular
+frontend/dist/
+frontend/tmp/
+frontend/out-tsc/
+frontend/.angular/
+
+# Rapports de tests et couverture
+frontend/coverage/
+frontend/.nyc_output/
+
+# Rapports Cypress
+frontend/cypress/reports/
+frontend/cypress/videos/
+frontend/cypress/screenshots/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environnement
+frontend/.env
+frontend/.env.local
+
+# Compilation
+*.js.map

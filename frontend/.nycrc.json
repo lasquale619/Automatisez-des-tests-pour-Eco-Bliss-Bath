@@ -1,0 +1,26 @@
+{
+  "all": true,
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/**/*.cy.ts",
+    "src/test.ts",
+    "src/polyfills.ts",
+    "src/environments/**",
+    "cypress/**/*"
+  ],
+  "extension": [
+    ".ts"
+  ],
+  "reporter": [
+    "html",
+    "json",
+    "text",
+    "lcov"
+  ],
+  "report-dir": "coverage",
+  "sourceMap": true,
+  "instrument": true
+}
