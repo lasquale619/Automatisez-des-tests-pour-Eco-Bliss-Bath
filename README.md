@@ -23,7 +23,7 @@ Clonez le projet pour le récupérer
 git clone https://github.com/lasquale619/Automatisez-des-tests-pour-Eco-Bliss-Bath
 ```
 ```
-cd Eco-Bliss-Bath-V2
+cd Automatisez-des-tests-pour-Eco-Bliss-Bath
 ```
 Pour démarrer l'API avec cette base de données.
 ```
@@ -43,11 +43,16 @@ Toujours dans le dossier frontend
 ```
 npm start
 ``` 
+# Installation du plugin code coverage
+Pour activer le code coverage, installer le module :
+
+```
+npm install --save-dev @cypress/code-coverage
+```
 
 # Ouvriri Cypress et lancé les tests
 Toujours dans le dossier frontend
 ```
-
 npx cypress open
 ```
 Puis 
