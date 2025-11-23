@@ -15,14 +15,17 @@
 Pour démarrer cet applicatif web vous devez avoir les outils suivants:
 - Docker
 - NodeJs
+- npm
 
 # Installation et démarrage
 Clonez le projet pour le récupérer
 ``` 
-git clone https://github.com/OpenClassrooms-Student-Center/Eco-Bliss-Bath-V2.git
+git clone https://github.com/lasquale619/Automatisez-des-tests-pour-Eco-Bliss-Bath
+```
+```
 cd Eco-Bliss-Bath-V2
 ```
-Pour démarrer l'API avec ça base de données.
+Pour démarrer l'API avec cette base de données.
 ```
 docker compose up -d
 ```
@@ -31,41 +34,51 @@ Rendez-vous dans le dossier frontend
 ```
 cd ./frontend
 ```
-npm i
+
 ```
-ou
-npm install (si vous préférez)
+npm install 
 ```
-# démarrer le frontend 
+# Démarrer le frontend 
 Toujours dans le dossier frontend
 ```
 npm start
 ``` 
 
-# Ouvriri Cypress
+# Ouvriri Cypress et lancé les tests
 Toujours dans le dossier frontend
 ```
 
 npx cypress open
 ```
 Puis 
-```
 
 Sélectionner E2E Testing
 
 Choisir le navigateur
 
 Lancer les fichiers de tests souhaités
+
+# Lancer tous les tests en mode Headless 
+Si vous voulez exécuter l’intégralité des tests d’un coup
 ```
+npx cypress run
+```
+
 # Générer un rapport de tests (Mochawesome)
+Dans le dossier frontend
+```
 npx cypress run --reporter mochawesome
 ```
-A la fin des tests
-```
-Rendez-vous dans le dossier frontend/mochawesome-report
-```
-cliquer sur le fichier html
-```
+Une fois les tests terminés
+
+Rendez-vous dans le dossier 
+
+frontend/mochawesome-report
+
+Ouvrir le fichie le fichier 
+
+mochawesome.html
+
 
 
 
