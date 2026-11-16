@@ -13,6 +13,7 @@ frontend/coverage/
 frontend/.nyc_output/
 
 # Rapports Cypress
+frontend/mochawesome-report/
 frontend/cypress/reports/
 frontend/cypress/videos/
 frontend/cypress/screenshots/
@@ -36,3 +37,6 @@ frontend/.env.local
 
 # Compilation
 *.js.map
+
+# Données MariaDB générées par Docker (la base est recréée depuis data/*.sql)
+mysql/

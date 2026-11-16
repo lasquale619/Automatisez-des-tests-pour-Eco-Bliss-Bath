@@ -1,92 +1,87 @@
 <div align="center">
 
-# OpenClassrooms - Eco-Bliss-Bath
+# Eco Bliss Bath — Automatisation des tests avec Cypress
+
+![Cypress](https://img.shields.io/badge/Cypress-15-17202C?logo=cypress&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-compose-2496ED?logo=docker&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-13-DD0031?logo=angular&logoColor=white)
+
 </div>
 
-<p align="center">
-    <img src="https://img.shields.io/badge/MariaDB-v11.7.2-blue">
-    <img src="https://img.shields.io/badge/Symfony-v6.2-blue">
-    <img src="https://img.shields.io/badge/Angular-v13.3.0-blue">
-    <img src="https://img.shields.io/badge/docker--build-passing-brightgreen">
-  <br><br><br>
-</p>
+Projet de formation **Testeur logiciel (OpenClassrooms)** : automatiser les tests d'**Eco Bliss Bath**, une boutique en ligne de produits de beauté écoresponsables, avant sa mise en production.
 
-# Prérequis
-Pour démarrer cet applicatif web vous devez avoir les outils suivants:
-- Docker
-- NodeJs
-- npm
+L'application se compose d'un front **Angular**, d'une **API Symfony** et d'une base **MariaDB**, lancées avec Docker.
 
-# Installation et démarrage
-Clonez le projet pour le récupérer
-``` 
-git clone https://github.com/lasquale619/Automatisez-des-tests-pour-Eco-Bliss-Bath
-```
-```
+## Ce que couvrent les tests
+
+**22 tests Cypress**, répartis en trois campagnes :
+
+| Fichier | Tests | Ce qui est vérifié |
+|---|---|---|
+| [`smoke.cy.js`](frontend/cypress/e2e/smoke.cy.js) | 4 | Chargement de l'accueil, menu de navigation, champs de connexion, boutons « Ajouter au panier » une fois connecté |
+| [`api.cy.js`](frontend/cypress/e2e/api.cy.js) | 9 | Connexion (200 + token / 401 utilisateur inconnu), accès au panier sans authentification (401), liste et fiche produit, ajout au panier, produit en rupture de stock, ajout d'un avis |
+| [`fonctionnels.cy.js`](frontend/cypress/e2e/fonctionnels.cy.js) | 9 | Parcours de connexion, ajout au panier, baisse du stock après ajout, quantité négative ou supérieure à 20 refusée, cohérence entre l'interface et l'API |
+
+### Bonnes pratiques mises en place
+
+- **Sélecteurs `data-cy`** : les tests ne dépendent ni du style ni de la structure HTML.
+- **Connexion par l'API** : le token est récupéré par une requête puis injecté dans le `localStorage`, ce qui évite de repasser par le formulaire à chaque test.
+- **Tests indépendants** : le panier est vidé par l'API avant chaque test.
+- **Interception réseau** (`cy.intercept`) pour attendre les vraies réponses de l'API au lieu de pauses fixes.
+- **Rapport Mochawesome** et **couverture de code** (`@cypress/code-coverage` + nyc).
+
+### Point relevé
+
+Dans l'application, l'ajout au panier passe par `PUT /orders/add`. Une requête `POST` sur ce même endpoint renvoie **405 Method Not Allowed**, ce qui fait échouer les 2 tests API d'ajout au panier.
+
+## Lancer le projet
+
+**Prérequis :** Docker, Node.js et npm.
+
+```bash
+git clone https://github.com/lasquale619/Automatisez-des-tests-pour-Eco-Bliss-Bath.git
 cd Automatisez-des-tests-pour-Eco-Bliss-Bath
-```
-Pour démarrer l'API avec cette base de données.
-```
+
+# 1. Base de données + API (http://localhost:8081)
+#    Au premier lancement, la base est créée à partir de data/diay0794_ebb.sql
 docker compose up -d
-```
-# Pour Installez les dépendances du projet
-Rendez-vous dans le dossier frontend
-```
-cd ./frontend
-```
 
-```
-npm install 
-```
-# Démarrer le frontend 
-Toujours dans le dossier frontend
-```
+# 2. Cypress et ses plugins (à la racine du projet)
+npm install
+
+# 3. Front Angular (http://localhost:4200)
+cd frontend
+npm install
 npm start
-``` 
-# Installation du plugin code coverage
-Pour activer le code coverage, installer le module :
-
-```
-npm install --save-dev @cypress/code-coverage
 ```
 
-# Ouvriri Cypress et lancé les tests
-Toujours dans le dossier frontend
-```
-npx cypress open
-```
-Puis 
+## Exécuter les tests
 
-Sélectionner E2E Testing
+Depuis le dossier `frontend`, avec l'API et le front démarrés :
 
-Choisir le navigateur
-
-Lancer les fichiers de tests souhaités
-
-# Lancer tous les tests en mode Headless 
-Si vous voulez exécuter l’intégralité des tests d’un coup
-```
-npx cypress run
+```bash
+npx cypress open    # mode interactif : choisir « E2E Testing » puis le navigateur
+npx cypress run     # toutes les campagnes en ligne de commande
 ```
 
-# Générer un rapport de tests (Mochawesome)
-Dans le dossier frontend
+Le rapport HTML est généré dans `frontend/mochawesome-report/mochawesome.html`.
+
+Les tests utilisent le compte de démonstration fourni avec la base de données (`test2@test.fr`), configuré dans [`cypress.config.js`](frontend/cypress.config.js).
+
+## Structure
+
 ```
-npx cypress run --reporter mochawesome
+├── data/                    # Jeu de données SQL chargé au premier démarrage
+├── docker-compose.yml       # MariaDB + API Symfony
+├── package.json             # Cypress, Mochawesome, couverture de code
+└── frontend/                # Application Angular
+    ├── cypress.config.js
+    └── cypress/
+        ├── e2e/             # smoke, api, fonctionnels
+        └── support/
 ```
-Une fois les tests terminés
 
-Rendez-vous dans le dossier 
+## Auteur
 
-frontend/mochawesome-report
-
-Ouvrir le fichie le fichier 
-
-mochawesome.html
-
-
-
-
-
-
-
+**Mohamed Bouguellid** — Testeur QA · [LinkedIn](https://www.linkedin.com/in/mohamed-bouguellid)
