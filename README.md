@@ -31,9 +31,11 @@ L'application se compose d'un front **Angular**, d'une **API Symfony** et d'une 
 - **Interception réseau** (`cy.intercept`) pour attendre les vraies réponses de l'API au lieu de pauses fixes.
 - **Rapport Mochawesome** et **couverture de code** (`@cypress/code-coverage` + nyc).
 
-### Point relevé
+### Anomalie détectée
 
-Dans l'application, l'ajout au panier passe par `PUT /orders/add`. Une requête `POST` sur ce même endpoint renvoie **405 Method Not Allowed**, ce qui fait échouer les 2 tests API d'ajout au panier.
+**L'endpoint d'ajout au panier n'accepte pas la méthode attendue.** L'ajout d'un produit au panier doit se faire en `POST /orders/add`, mais l'API répond **405 Method Not Allowed** : elle n'accepte que `PUT`.
+
+Les 2 tests API qui vérifient l'ajout au panier (produit disponible et produit en rupture de stock) échouent volontairement tant que l'anomalie n'est pas corrigée.
 
 ## Lancer le projet
 
